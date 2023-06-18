@@ -1,0 +1,1 @@
+{"name":"Local: microandmaze","url":"c:\\Users\\maanu\\Pictures\\cpp\\csesSolution\\microandmaze.cpp","tests":[{"id":1675501220889,"input":"3 3\n1 0 1\n1 0 0\n1 1 1","output":"Yes"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\maanu\\Pictures\\cpp\\csesSolution\\microandmaze.cpp","group":"local","local":true}

@@ -1,0 +1,1 @@
+{"name":"Local: articulationpoint","url":"c:\\Users\\maanu\\Pictures\\cpp\\csesSolution\\articulationpoint.cpp","tests":[{"id":1675516999305,"input":"5 5\n1 2\n1 3\n3 2\n3 4\n5 4","output":"2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\maanu\\Pictures\\cpp\\csesSolution\\articulationpoint.cpp","group":"local","local":true}

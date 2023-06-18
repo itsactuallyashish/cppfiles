@@ -1,0 +1,1 @@
+{"name":"Local: primMST","url":"c:\\Users\\maanu\\Pictures\\cpp\\csesSolution\\primMST.cpp","tests":[{"id":1675418504564,"input":"4 5\n1 2 7\n1 4 6\n4 2 9\n4 3 8\n2 3 6","output":"19"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\maanu\\Pictures\\cpp\\csesSolution\\primMST.cpp","group":"local","local":true}

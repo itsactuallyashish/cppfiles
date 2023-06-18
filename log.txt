@@ -1,0 +1,9 @@
+avoiding deadlock
+prefer locking single mutex
+avoid locking a mutex and then calling a user provided function
+use std:: lock() to lock more than one mutex
+lock the mutex in same order
+
+locking granularity
+fine grained lock : protects small amount of data
+coarse grained lock : protects big amount of data

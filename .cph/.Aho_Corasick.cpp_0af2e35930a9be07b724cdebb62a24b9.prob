@@ -1,0 +1,1 @@
+{"name":"Local: Aho_Corasick","url":"c:\\Users\\maanu\\Pictures\\cpp\\csesSolution\\Aho_Corasick.cpp","tests":[{"id":1680794595943,"input":"6\nACC\nATC\nCAT\nGCG\nC\nT\nGCATCG","output":"-1\n2 \n1 \n-1\n1 4 \n3"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\maanu\\Pictures\\cpp\\csesSolution\\Aho_Corasick.cpp","group":"local","local":true}
