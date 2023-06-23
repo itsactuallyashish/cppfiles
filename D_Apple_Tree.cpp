@@ -12,31 +12,39 @@ void putl(T&&... args) { ((cout << args << " "), ...); cout<<'\n';}
 #define all(x) x.begin(), x.end()
 
 
+int dfs(int v,int p,vector<ll>&c,vector<vector<int>>&adj){
+    int cnt=0;
+    for(auto c:adj[v]){
+        if(c==p) continue;
+        cnt++;
+    }
+    if(cnt==0){
+        return c[v]=1;
+    }
+    for(auto x:adj[v]){
+        if(x==p) continue;
+        c[v]+=dfs(x,v,c,adj);
+    }
+    return c[v];
+}
 void solve() {
         int n;see(n);
-        multiset<int>st;
-        st.clear();
-        vector<int>val;
-        for(int i=0;i<n;i++){
-            int x;see(x);
-            val.push_back(x);
+        vector<vector<int>> adj(n+1);
+        for(int i=0;i<n-1;i++){
+            int a,b;see(a,b);a--,b--;
+            adj[a].push_back(b);
+            adj[b].push_back(a);
         }
-        sort(all(val));
-        for(int i=0;i<n;i++){
-            int x= val[i];
-            if(x==0){
-                 st.insert(x);
-            }
-            else if(st.find(x-1)!=st.end()){
-                  auto it=st.find(x-1);
-                  st.erase(it);
-                  st.insert(x);
-            }else{
-                put("NO");return;
-            }
-            
+        vector<ll>c(n+1,0);
+        dfs(0,-1,c,adj);
+        int m;
+        see(m);
+        while(m--){
+            int a,b;see(a,b);
+            a--,b--;
+            ll ans = c[a]*c[b];
+            putl(ans);
         }
-        put("YES");
 }
   
     
@@ -46,7 +54,6 @@ int main() {
     cin>>t;
     for (int i = 1; i <= t; i++) {
         solve();
-        cout<<'\n';
     }
 
 }

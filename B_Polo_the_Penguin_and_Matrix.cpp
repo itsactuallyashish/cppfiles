@@ -13,37 +13,36 @@ void putl(T&&... args) { ((cout << args << " "), ...); cout<<'\n';}
 
 
 void solve() {
-        int n;see(n);
-        multiset<int>st;
-        st.clear();
-        vector<int>val;
-        for(int i=0;i<n;i++){
-            int x;see(x);
-            val.push_back(x);
+        int n,k,d;
+        see(n,k,d);
+        vector<int>a;
+        for(int i=1;i<=n*k;i++){
+                int x;see(x);
+                // if((x+d)%d !=(x-d)%d){
+                //     put(-1);
+                //     return;
+                // }
+                a.push_back(x);
         }
-        sort(all(val));
-        for(int i=0;i<n;i++){
-            int x= val[i];
-            if(x==0){
-                 st.insert(x);
-            }
-            else if(st.find(x-1)!=st.end()){
-                  auto it=st.find(x-1);
-                  st.erase(it);
-                  st.insert(x);
-            }else{
-                put("NO");return;
-            }
-            
+        sort(all(a));
+        int median = a[(a.size()-1)/2];
+        
+        ll ans=0;
+        for(int i:a){
+            ans += abs(i-median);
         }
-        put("YES");
+        if(ans%d==0){
+
+        put(ans/d);
+        }else put(-1);
+
 }
   
     
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
     int t=1;
-    cin>>t;
+    //cin>>t;
     for (int i = 1; i <= t; i++) {
         solve();
         cout<<'\n';

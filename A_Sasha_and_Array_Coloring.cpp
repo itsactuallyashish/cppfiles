@@ -13,30 +13,17 @@ void putl(T&&... args) { ((cout << args << " "), ...); cout<<'\n';}
 
 
 void solve() {
-        int n;see(n);
-        multiset<int>st;
-        st.clear();
-        vector<int>val;
-        for(int i=0;i<n;i++){
-            int x;see(x);
-            val.push_back(x);
+      int n;see(n);
+              vector<ll>v(n);
+              for(auto &in :v)see(in);
+        sort(all(v));
+        ll ans=0;
+        for(int i=0;i<n/2;i++){
+            if(i==n-i-1) break;
+            ans +=abs(v[i]-v[n-i-1]);
         }
-        sort(all(val));
-        for(int i=0;i<n;i++){
-            int x= val[i];
-            if(x==0){
-                 st.insert(x);
-            }
-            else if(st.find(x-1)!=st.end()){
-                  auto it=st.find(x-1);
-                  st.erase(it);
-                  st.insert(x);
-            }else{
-                put("NO");return;
-            }
-            
-        }
-        put("YES");
+        put(ans);
+
 }
   
     

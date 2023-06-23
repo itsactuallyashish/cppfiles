@@ -10,47 +10,31 @@ void putl(T&&... args) { ((cout << args << " "), ...); cout<<'\n';}
 #define deb(x) cerr << #x << "=" << x << endl
 #define deb2(x, y) cerr << #x << "=" << x << "," << #y << "=" << y << endl
 #define all(x) x.begin(), x.end()
-const ll mod= 1073741824;
-const int mxn = 1e6+4;
+const int mxn=1e6+10;
 int isprime[mxn]={1};
 void sieve(){
-        isprime[0]=isprime[1]=1;
+        isprime[0]=isprime[1]=0;
         for(int i=2;i<mxn;i++)
-           isprime[i]=i;
+           isprime[i]=1;
         for(int i=2;i*i<mxn;i++){
-            if(isprime[i]==i){
+            if(isprime[i]==1){
                 for(int j=i+i;j<mxn;j+=i)
-                    if(isprime[j]==j)
-                      isprime[j]=i;
+                    if(isprime[j]==1)
+                      isprime[j]=0;
             }
         }
 }
-int get_factor(int x){
-   int ans=1;
-   while(x!=1){
-        int cnt=1;
-        int p=isprime[x];
-       while(x%p==0){
-          x=x/p;
-          cnt++;
-       }
-       ans = ans * (cnt);
-   }
-   return ans;
-}
 void solve() {
-            sieve();
-            int n,m,k;
-            see(n,m,k);
-            ll ans =0;
-            for(int i=1;i<=n;i++){
-                for(int j=1;j<=m;j++){
-                    for(int x=1;x<=k;x++){
-                        (ans +=get_factor(x*i*j))%mod;
-                    }
-                }
-            }
-            put(ans);
+    sieve();
+    int n;see(n);
+    for(int i=0;i<n;i++){
+            ll x;see(x);
+            double val=sqrt(x);
+            if(floor(val)==val && isprime[(int)floor(val)]){
+                putl("YES");
+            }else putl("NO");
+    }
+    
 }
   
     

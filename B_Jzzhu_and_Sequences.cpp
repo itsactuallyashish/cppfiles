@@ -11,39 +11,41 @@ void putl(T&&... args) { ((cout << args << " "), ...); cout<<'\n';}
 #define deb2(x, y) cerr << #x << "=" << x << "," << #y << "=" << y << endl
 #define all(x) x.begin(), x.end()
 
-
+const int md=1e9+7;
 void solve() {
-        int n;see(n);
-        multiset<int>st;
-        st.clear();
-        vector<int>val;
-        for(int i=0;i<n;i++){
-            int x;see(x);
-            val.push_back(x);
-        }
-        sort(all(val));
-        for(int i=0;i<n;i++){
-            int x= val[i];
-            if(x==0){
-                 st.insert(x);
+            ll n,m;
+            see(n,m);
+            ll x;see(x);
+            ll ans;
+            if(x%6==0){
+                ans = (n-m) %md;
+                if(ans<0) ans+=md;
+                put(ans);
+
+            }else {
+                
+                x=x%6;
+                if(x==1){
+                    ans= n%md;
+                }
+                if(x==2){
+                    ans=m%md;
+                }
+                if(x==3)
+                  ans=(m-n)%md;
+                if(x==4) ans= (-n)%md;
+                if(x==5)  ans= (-m)%md;
+                if(ans<0) ans+=md;
+                put(ans);
             }
-            else if(st.find(x-1)!=st.end()){
-                  auto it=st.find(x-1);
-                  st.erase(it);
-                  st.insert(x);
-            }else{
-                put("NO");return;
-            }
-            
-        }
-        put("YES");
+
 }
   
     
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
     int t=1;
-    cin>>t;
+    //cin>>t;
     for (int i = 1; i <= t; i++) {
         solve();
         cout<<'\n';
