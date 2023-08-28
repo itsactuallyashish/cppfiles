@@ -1,78 +1,73 @@
-#include <bits/stdc++.h>
-#define endl "\n"
+#include<bits/stdc++.h>
 using namespace std;
+template<typename... T>
+void see(T&... args) { ((cin >> args), ...);}
+template<typename... T>
+void put(T&&... args) { ((cout << args << " "), ...);}
+template<typename... T>
+void putl(T&&... args) { ((cout << args << " "), ...); cout<<'\n';}
 #define ll long long
-const ll INF = 1e17;
-const ll NINF = INF*(-1);
- 
-struct triplet{
-	int first;
-	int second;
-	ll third;
+#define deb(x) cerr << #x << "=" << x << endl
+#define deb2(x, y) cerr << #x << "=" << x << "," << #y << "=" << y << endl
+#define all(x) x.begin(), x.end()
+const ll inf=1e17;
+const ll ninf=-1*inf;
+struct edge{
+		int v,u;
+		ll w;
 };
- 
-int n, m;	
-vector<triplet> edges;
-vector<ll> dist;
- 
-void bellman_ford()
-{
-	for(int i = 1; i < n; ++i)
-	{
-		for(auto e: edges)
-		{
-			int u = e.first;
-			int v = e.second;
-			ll d = e.third;
-			if(dist[u] == INF) continue;
-			dist[v] = min(dist[v], d+dist[u]);
-			dist[v] = max(dist[v], NINF);
+void solve() {
+		int n,m;
+		see(n,m);
+		if(n==1){
+			put(-1);return;
 		}
-	} // n relaxations
- 
-	for(int i = 1; i < n; ++i)
-	{
-		for(auto e: edges)
-		{
-			int u = e.first;
-			int v = e.second;
-			ll d = e.third;
-			if(dist[u] == INF) continue;
-			dist[v] = max(dist[v], NINF);
-			if(dist[u]+d < dist[v])
-			{
-				dist[v] = NINF;
+		vector<edge>g(m);
+		for(int i=0;i<m;i++){
+				see(g[i].u,g[i].v,g[i].w);
+				g[i].w=-1*g[i].w;
+		}
+		vector<ll>d(n+1,inf);
+		d[1]=0;
+		for(int i=1;i<n;i++){
+			for(auto e:g){
+				int u=e.u;
+				int v=e.v;
+				ll w=e.w;
+				if(d[u]==inf) continue;
+				d[v]=min(d[v],d[u]+w);
+				d[v]=max(d[v],ninf);
 			}
 		}
-	}
+		// for -ve cycles
+		for(int i=1;i<n;i++){
+			for(auto e:g){
+				int u=e.u;
+				int v=e.v;
+				ll w=e.w;
+				if(d[u]==inf) continue;
+				d[v] = max(ninf,d[v]);
+				if(d[u]+w < d[v]){
+					d[v]=ninf;
+				}
+			}
+		}
+		if(d[n]==ninf){
+			put(-1);
+			return;
+		}
+		put(-1*d[n]);
+
 }
- 
- 
-int main()
-{
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cin >> n >> m;
-	dist.resize(n+1);
-	edges.resize(m);
-	for(int i = 0; i < m; ++i)
-	{
-		struct triplet inp;
-		cin >> inp.first >> inp.second >> inp.third;
-		inp.third *= -1; 
-		edges[i] = inp;
+  
+	
+int main() {
+	ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+	int t=1;
+	//cin>>t;
+	for (int i = 1; i <= t; i++) {
+		solve();
+		cout<<'\n';
 	}
- 
-	for(int i = 2; i <= n; ++i)
-	{
-		dist[i] = INF;
-	}
- 
-	bellman_ford();
-	if(dist[n] == NINF)
-	{
-		cout << -1 << endl;
-		return 0;
-	} 
-	cout << dist[n] * (-1) << endl;
+
 }

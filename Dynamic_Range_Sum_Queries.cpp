@@ -1,42 +1,40 @@
 #include<iostream>
 #include<vector>
+#define ll long long
 using namespace std;
-long long sgt[1000001];
+const int mxn=1000001;
 int n;
-long long query(int l,int r ){
-    l+=n;r+=n;
-    long long res=0;
-    for(;l<r;l>>=1,r>>=1){
-        if(l&1) res+=sgt[l++];
-        if(r&1) res+=sgt[--r];
-    }
-    return res;
+ll t[2*mxn];
+void update(int in,int val){
+            in+=n;
+            t[in]=val;
+            while(in>=1){
+                in>>=1;
+                t[in]=t[2*in]+t[2*in+1];
+            }
 }
-void update(int i , int val){
-    i +=n;
-    sgt[i]=val;
-
-    while(i>1){
-        i>>=1;
-        sgt[i]=sgt[2*i]+sgt[2*i+1];
-    }
-    return;
+ll sum(int l,int r){
+        ll res=0;
+        for(l+=n,r+=n+1;l<r;l>>=1,r>>=1){
+                if(l&1) res+=t[l++];
+                if(r&1) res+=t[--r];
+        }
+        return res;
 }
 int main(){
     int q;
     cin>>n>>q;
     vector<long long> ar(n);
     for(auto &elem:ar) cin>>elem;
-    for(int i=0;i<n;i++) sgt[i+n]=ar[i];
-    for(int i=n-1;i>=1;i--) sgt[i]=sgt[2*i]+sgt[2*i+1];
+    for(int i=0;i<n;i++) update(i,ar[i]);
   for(int i=0;i<q;i++){
     int code;
     cin>>code;
     if(code==2){
     int l,r;
     cin>>l>>r;
-    l--;
-    cout<<query(l,r)<<"\n";
+    l--;r--;
+    cout<<sum(l,r)<<"\n";
     }
     else {
         int in,val;
